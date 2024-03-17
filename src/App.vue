@@ -1,19 +1,25 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import TaskListBody from './components/TaskListBody.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    TaskListBody
   }
 });
 </script>
 
 <template>
-  <HelloWorld/>
+  <TaskListBody/>
 </template>
 
-<style>
+<style scoped>
+
+html, body{
+  padding: 0; 
+  margin: 0;
+  background-color: #F9FAFE;
+}
 
 </style>
