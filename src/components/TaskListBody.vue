@@ -11,20 +11,44 @@ export default {
     </header>
     <main>
       
-      <div class="settings_list">
-        <div class="block_sort">
+      <div class="settings">
+        <div class="sort_block">
 
           <p class="settings_header">Сортировка</p>
-          <ul class="sort">
+          <ul class="list">
             <li class="sort_elem"><input type="radio" name="sort" style="transform:scale(1.5);margin-right: 10px;">Новые</li>
             <li class="sort_elem"><input type="radio" name="sort" style="transform:scale(1.5);margin-right: 10px;">Старые</li>
           </ul>
 
         </div>
+
+        <div class="selection_block">
+
+          <p class="settings_header">Приоритет</p>
+          <ul class="list">
+            <li class="selection_elem"><input type="checkbox" name="selection_priority" style="transform:scale(1.5);margin-right: 10px;">Low</li>
+            <li class="selection_elem"><input type="checkbox" name="selection_priority" style="transform:scale(1.5);margin-right: 10px;">Normal</li>
+            <li class="selection_elem"><input type="checkbox" name="selection_priority" style="transform:scale(1.5);margin-right: 10px;">High</li>
+          </ul>
+
+          <p class="settings_header">Отметка</p>
+          <ul class="list">
+            <li class="selection_elem"><input type="checkbox" name="selection_mark" style="transform:scale(1.5);margin-right: 10px;">Research</li>
+            <li class="selection_elem"><input type="checkbox" name="selection_mark" style="transform:scale(1.5);margin-right: 10px;">Design</li>
+            <li class="selection_elem"><input type="checkbox" name="selection_mark" style="transform:scale(1.5);margin-right: 10px;">Development</li>
+          </ul>
+
+        </div>
       </div>
 
-      <div class="tasks_list">
-        <button>hi</button>
+      <div class="tasks">
+        <input class="add_button" type="button" value="Добавить задачу">
+        <div class="block_task">
+          <p>Тестовая задача №1</p> 
+          <p>Создано:</p>  
+          <p>Приоритет:</p>  
+          <p>Отметки:</p>             
+        </div>
       </div>
     </main>
 
@@ -45,7 +69,6 @@ main{
   margin: 40px 40px 100px;
   display: flex;
   flex-wrap: nowrap;
-  gap: 20px;
 }
 
 .settings_header{
@@ -55,7 +78,7 @@ main{
   font-weight: 600;
 }
 
-.sort{
+.list{
   margin: 0;
   padding: 0;
 }
@@ -65,21 +88,45 @@ main{
   padding-bottom: 10px;
 }
 
-.settings_list{
+.settings{
   width: 20%;
-  display: flex; 
 }
 
-.tasks_list{
-  background: #ccd;
-  width: 80%; 
+.tasks{
+  width: 80%;
+  padding-left: 50px;  
 }
 
-.block_sort{
+.sort_block{
   width: 100%;
-  padding: 20px;
+  padding: 10px;
+  box-shadow: -1px -1px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.selection_block{
+  width: 100%;
+  padding: 10px;
   box-shadow: -1px -1px 8px rgba(0, 0, 0, 0.1);
 }
 
+.selection_elem{
+  list-style-type: none;
+  padding-bottom: 10px;
+}
+
+.add_button{
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #0091DB;
+  color: #FFF;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.block_task{
+  padding: 20px;
+  box-shadow: -1px -1px 8px rgba(0, 0, 0, 0.1);
+}
 
 </style>
