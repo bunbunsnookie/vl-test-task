@@ -5,16 +5,15 @@ import TaskListBody from './components/TaskListBody.vue';
 export default defineComponent({
   name: 'App',
   components: {
-    TaskListBody
   }
 });
 </script>
 
 <template>
-  <TaskListBody/>
+  <RouterView/>
 </template>
 
-<style scoped>
+<style>
 
 html, body{
   padding: 0; 

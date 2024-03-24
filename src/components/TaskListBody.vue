@@ -43,12 +43,14 @@ export default {
 
       <div class="tasks">
         <input class="add_button" type="button" value="Добавить задачу">
-        <div class="block_task">
-          <p>Тестовая задача №1</p> 
-          <p>Создано:</p>  
-          <p>Приоритет:</p>  
-          <p>Отметки:</p>             
-        </div>
+        <RouterLink to="/view" style="text-decoration: none;">
+          <div class="block_task">
+            <p>Тестовая задача №1</p> 
+            <p>Создано:</p>  
+            <p>Приоритет:</p>  
+            <p>Отметки:</p>             
+          </div>
+        </RouterLink>
       </div>
     </main>
 
@@ -128,5 +130,11 @@ main{
   padding: 20px;
   box-shadow: -1px -1px 8px rgba(0, 0, 0, 0.1);
 }
+
+.block_task p{
+  color: black;
+}
+
+
 
 </style>
