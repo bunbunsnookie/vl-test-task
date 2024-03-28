@@ -1,65 +1,60 @@
 <script lang="ts">
-export default {
-  name: 'ViewTask'
-}
+import { Task } from 'types/type';
+import { defineComponent } from 'vue';
+import { mapActions, mapMutations } from 'vuex';
+
+export default defineComponent({
+  name: 'ViewTask',
+  data: function() {
+    return{
+      task: {} as Task
+    }
+  },
+  methods: {
+    ...mapActions(['getTaskById']),
+    ...mapMutations(['delete']),
+    Delete(){
+      console.log('1111')
+      this.delete(this.task)
+      this.$router.push('/')
+    }
+  },
+  async mounted() {
+    const task: Task = await this.getTaskById(this.$route.params.id);
+    this.task = task;
+  }
+})
 
 </script>
 
 <template>
     <header>
-      <i>Список задач</i>
+      <i>Просмотр</i>
     </header>
     <main>
 
-      
-        <div class="settings">
-
-            <button class="b_button">Добавить задачу</button>
-
-            <div class="sort_block">
-
-            <p class="settings_header">Сортировка</p>
-            <ul class="list">
-                <li class="sort_elem"><input type="radio" name="sort" style="transform:scale(1.5);margin-right: 10px;">Новые</li>
-                <li class="sort_elem"><input type="radio" name="sort" style="transform:scale(1.5);margin-right: 10px;">Старые</li>
-            </ul>
-
-            </div>
-
-            <div class="selection_block">
-
-                <div>
-                    <p class="settings_header">Приоритет</p>
-                    <ul class="list">
-                        <li class="selection_elem"><input type="checkbox" name="selection_priority" style="transform:scale(1.5);margin-right: 10px;">Low</li>
-                        <li class="selection_elem"><input type="checkbox" name="selection_priority" style="transform:scale(1.5);margin-right: 10px;">Normal</li>
-                        <li class="selection_elem"><input type="checkbox" name="selection_priority" style="transform:scale(1.5);margin-right: 10px;">High</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <p class="settings_header">Отметка</p>
-                    <ul class="list">
-                        <li class="selection_elem"><input type="checkbox" name="selection_mark" style="transform:scale(1.5);margin-right: 10px;">Research</li>
-                        <li class="selection_elem"><input type="checkbox" name="selection_mark" style="transform:scale(1.5);margin-right: 10px;">Design</li>
-                        <li class="selection_elem"><input type="checkbox" name="selection_mark" style="transform:scale(1.5);margin-right: 10px;">Development</li>
-                    </ul>
-                </div>
-
-
-            </div>
+      <div class="block">
+        <div class="buttons">
+          <div>
+            <RouterLink to="/"><button class="w_button">Назад</button></RouterLink>
+            <RouterLink :to="`/edit/${task.id}`" exact><button class="b_button">Редактировать</button></RouterLink>
+          </div>
+          <button @click="Delete" class="r_button">Удалить</button>
         </div>
-
-      <div class="tasks">
-        <RouterLink to="/"><button class="w_button">Назад</button></RouterLink>
-        <button class="b_button">Редактировать</button>
         <div class="block_task">
-          <p>Тестовая задача №1</p> 
-          <p>Создано:</p>  
-          <p>Приоритет:</p>  
-          <p>Отметки:</p>             
+          <p class="header_task_params">Название задачи </p>
+          <p>{{ task.name }}</p> 
+          <p class="header_task_params">Дата создания</p> 
+          <p>{{ task.date }}</p>
+          <p v-if="task.priority" class="header_task_params">Приоритет</p>  
+          <p v-if="task.priority" >{{ task.priority }}</p>
+          <p v-if="task.mark" class="header_task_params">Отметки</p>
+          <p v-if="task.mark">{{ task.mark.join() }}</p>     
+          <p class="header_task_params">Описание</p>  
+          <p>{{ task.description }}</p>      
         </div>
       </div>
+
     </main>
 
 </template>
@@ -81,50 +76,14 @@ main{
   flex-wrap: nowrap;
 }
 
-.settings_header{
-  text-transform: uppercase;
-  color: #9C9C9C;
-  font-size: small;
-  font-weight: 600;
-}
-
-.list{
-  margin: 0;
-  padding: 0;
-}
-
-.sort_elem{
-  list-style-type: none;
-  padding-bottom: 10px;
-}
-
-.settings{
-  width: 25%;
-}
-
-.tasks{
-  width: 75%;
-  padding-left: 50px;  
-}
-
-.sort_block{
-  width: 100%;
-  padding: 10px;
-  box-shadow: -1px -1px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-}
-
-.selection_block{
-  width: 100%;
-  padding: 10px;
-  box-shadow: -1px -1px 8px rgba(0, 0, 0, 0.1);
+.buttons{
   display: flex;
-  gap: 40px;
+  justify-content: space-between;
 }
 
-.selection_elem{
-  list-style-type: none;
-  padding-bottom: 10px;
+.block{
+  padding: 20px; 
+  width: 100%; 
 }
 
 .b_button{
@@ -147,9 +106,27 @@ main{
   margin-right: 10px;
 }
 
+.r_button{
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #e82a2a;
+  color: #FFF;
+  border: none;
+  margin-bottom: 20px;
+  box-shadow: -1px -1px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+}
+
 .block_task{
   padding: 20px;
   box-shadow: -1px -1px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header_task_params{
+  text-transform: uppercase;
+  color: #9C9C9C;
+  font-size: small;
+  font-weight: 600;
 }
 
 </style>

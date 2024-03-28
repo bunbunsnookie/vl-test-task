@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import TaskListBody from './components/TaskListBody.vue';
 
 export default defineComponent({
   name: 'App',
